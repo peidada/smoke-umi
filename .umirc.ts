@@ -5,6 +5,10 @@ export default defineConfig({
     type: 'none',
   },
 
+  links: [{ rel: 'icon', href: 'http://81.70.92.245/pictory/logo.ico' }],
+
+  title: 'The road of photography',
+
   //开启按需加载
   dynamicImport: {},
   //开启按需加载后把 css 打包成一个文件
@@ -43,6 +47,8 @@ export default defineConfig({
   },
   routes: [
     { path: '/', component: '@/pages/index' },
+    { path: '/login', component: '@/pages/login' },
+    { path: '/register', component: '@/pages/register' },
     { path: '/users', component: '@/pages/users' },
   ],
   targets: {

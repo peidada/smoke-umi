@@ -1,13 +1,32 @@
-import request from '../utils/request';
+import request from '@/utils/request';
 
-export function login(data) {
-  return request.post(`/api/users/login`, data);
+// 测试注册
+export async function registerUser(params) {
+  // params 来自于effects中参数
+  return request(`/api/api/users/registerUser`, {
+    // 请求方式
+    method: 'POST',
+    // 用data包裹参数是官方指定写法，如果data有参数umi-request会默认读取data里面参数。
+    data: params,
+  });
 }
 
-export function getUser(data) {
-  return request.get(`/api/api/users/getUser?id=${data}`);
+// 测试登录
+export async function login(params) {
+  // params 来自于effects中参数
+  return request(`/api/api/users/login`, {
+    // 请求方式
+    method: 'POST',
+    // 用data包裹参数是官方指定写法，如果data有参数umi-request会默认读取data里面参数。
+    data: params,
+  });
 }
 
-export function registerUser(data) {
-  return request.post(`/api/users/registerUser`, data);
+// 获取get接口
+export async function getUser(params) {
+  // params 来自于effects中参数
+  return request(`/api/api/users/getUser?id=${params}`, {
+    // 请求方式
+    method: 'GET',
+  });
 }

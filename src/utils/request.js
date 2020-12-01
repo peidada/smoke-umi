@@ -1,7 +1,3 @@
-/**
- * request 网络请求工具
- * 更详细的 api 文档: https://github.com/umijs/umi-request
- */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 
@@ -48,12 +44,12 @@ const request = extend({
 
 // request拦截器, 改变url 或 options.
 request.interceptors.request.use(async (url, options) => {
-  let c_token = localStorage.getItem('Token');
+  let c_token = localStorage.getItem('x-auth-token');
   if (c_token) {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: c_token,
+      'x-auth-token': c_token,
     };
     return {
       url: url,
@@ -63,7 +59,7 @@ request.interceptors.request.use(async (url, options) => {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: c_token,
+      'x-auth-token': c_token,
     };
     return {
       url: url,
@@ -74,9 +70,9 @@ request.interceptors.request.use(async (url, options) => {
 
 // response拦截器, 处理response
 request.interceptors.response.use((response, options) => {
-  let token = response.headers.get('Token');
+  let token = response.headers.get('x-auth-token');
   if (token) {
-    localStorage.setItem('Token', token);
+    localStorage.setItem('x-auth-token', token);
   }
   return response;
 });

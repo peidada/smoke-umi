@@ -11,5 +11,13 @@ export const dva = {
         console.error(e);
       }
     },
+    onSuccess(e, a) {
+      if (e.message) {
+        message.success(e.message);
+      } else {
+        /* eslint-disable */
+        console.error(e);
+      }
+    },
   },
 };

@@ -2,11 +2,10 @@ import * as services from '../services/users';
 import { history } from 'umi';
 
 export default {
-  namespace: 'usersModel',
+  namespace: 'registerModel',
 
   state: {
-    accessExpiredAt: '',
-    token: '',
+    data: {},
   },
 
   subscriptions: {
@@ -16,23 +15,20 @@ export default {
   },
 
   effects: {
-    *loginFunc({ payload: todo }, { call, put }) {
+    *registerUser({ payload: todo }, { call, put }) {
       // eslint-disable-line
-      const response = yield call(services.login, todo);
+      const response = yield call(services.registerUser, todo);
       // console.log(response);
       if (response.data.code == 200) {
         // yield put({
         //   type: 'save',
         //   payload: response.data,
         // });
-        localStorage.setItem('Token', response.data.data.token);
-        history.push('/');
+        // history.push('/');
+        onSuccess(response.data.data.msg);
       } else {
         onError(response.data.msg);
       }
-    },
-    *getUser({ payload: id }, { call, put }) {
-      const response = yield call(services.getUser, id);
     },
   },
 
@@ -40,8 +36,7 @@ export default {
     save(state, action) {
       return {
         ...state,
-        accessExpiredAt: action.payload.data.accessExpiredAt,
-        token: action.payload.data.token,
+        data: action.payload.data.data,
       };
     },
   },

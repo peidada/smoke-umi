@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'dva';
 import styles from './users.less';
 import { Button } from 'antd';
 
-class UsersPage extends Component {
+class UsersPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,7 +15,7 @@ class UsersPage extends Component {
   }
 
   buttonClick = () => {
-    console.log('111', process.env.NODE_ENV);
+    console.log(process.env.NODE_ENV);
     this.props.dispatch({
       type: 'usersModel/getUser',
       payload: 1,

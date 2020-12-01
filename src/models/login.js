@@ -2,7 +2,7 @@ import * as services from '../services/users';
 import { history } from 'umi';
 
 export default {
-  namespace: 'usersModel',
+  namespace: 'loginModel',
 
   state: {
     accessExpiredAt: '',
@@ -16,7 +16,7 @@ export default {
   },
 
   effects: {
-    *loginFunc({ payload: todo }, { call, put }) {
+    *login({ payload: todo }, { call, put }) {
       // eslint-disable-line
       const response = yield call(services.login, todo);
       // console.log(response);
@@ -30,9 +30,6 @@ export default {
       } else {
         onError(response.data.msg);
       }
-    },
-    *getUser({ payload: id }, { call, put }) {
-      const response = yield call(services.getUser, id);
     },
   },
 
